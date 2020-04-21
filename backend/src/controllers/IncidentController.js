@@ -14,7 +14,7 @@ module.exports = {
         'ongs.email',
         'ongs.whatsapp',
         'ongs.city', 
-        'ongs.uf'
+        'ongs.uf',
     ]);
         
         response.header('X-Total-Count', count['count(*)']);
@@ -23,12 +23,13 @@ module.exports = {
     },
 
     async create(request, response){
-        const {title, description, value} = request.body;
+        const {title, description, value, video_link} = request.body;
         const ong_id = request.headers.authorization;
         const [id] = await connection('incidents').insert({
             title,
             description,
             value,
+            video_link,
             ong_id
         });
         return response.json({id})
